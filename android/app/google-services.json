@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "628089003387",
+    "project_id": "adventures-app-78791",
+    "storage_bucket": "adventures-app-78791.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628089003387:android:765662e88f9480b72a31de",
+        "android_client_info": {
+          "package_name": "com.example.adventures_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628089003387-otae9v9c79mf1i804937ii4t6tr4qhps.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQZh_qy9DjJpVv2J1bCoTms-2XHzlNCo4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628089003387-otae9v9c79mf1i804937ii4t6tr4qhps.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
