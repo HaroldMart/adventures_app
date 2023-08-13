@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:628089003387:android:765662e88f9480b72a31de",
+        "mobilesdk_app_id": "1:628089003387:android:7724b66d06bd9c2c2a31de",
         "android_client_info": {
           "package_name": "com.example.adventures_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "628089003387-otae9v9c79mf1i804937ii4t6tr4qhps.apps.googleusercontent.com",
+          "client_id": "628089003387-mgg7s705cco299o7e24tbnhv2c0quqak.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,8 +27,15 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "628089003387-otae9v9c79mf1i804937ii4t6tr4qhps.apps.googleusercontent.com",
+              "client_id": "628089003387-mgg7s705cco299o7e24tbnhv2c0quqak.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "628089003387-6ghv19l4qasgfa0mfr0m3qelgcj5k19u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.adventuresApp.RunnerTests"
+              }
             }
           ]
         }
