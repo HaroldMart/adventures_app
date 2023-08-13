@@ -19,6 +19,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final TextEditingController _emailTextController = TextEditingController();
   final TextEditingController _userNameTextController = TextEditingController();
   final Logger _logger = Logger();
+  String errorMessage = "";
   
   @override
   Widget build(BuildContext context) {
@@ -49,12 +50,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Enter UserName", Icons.person_outline, false,
-                    _userNameTextController),
-                const SizedBox(
-                  height: 20,
-                ),
-                reusableTextField("Enter Email Id", Icons.person_outline, false,
+                reusableTextField("Enter Email", Icons.person_outline, false,
                     _emailTextController),
                 const SizedBox(
                   height: 20,
@@ -69,17 +65,54 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       .createUserWithEmailAndPassword(
                           email: _emailTextController.text,
                           password: _passwordTextController.text)
-                      .then((value) {
-                    _logger.i("Created New Account");
+                      .then((userCredential) {
+                         User? user = userCredential.user;
+                         user?.sendEmailVerification();
+                         
+                         const Text("Created New Account");
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomeScreen()));
                   }).onError((error, stackTrace) {
                    _logger.e("Error ${error.toString()}");
+
+                    showErrors(error.toString());
                   });
-                })
+                }),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  errorMessage,
+                  style: const TextStyle(color: Colors.red, fontSize: 16),
+                )
               ],
             ),
           ))),
     );
+  }
+
+  
+  void showErrors(String error) {
+    if (error.toString().contains("The email address is badly formatted")) {
+      setState(() {
+        errorMessage = "Error: Email not formatted";
+      });
+    } else if (error
+        .toString()
+        .contains("Unable to establish connection on channel")) {
+      setState(() {
+        errorMessage = "Error: Fill the fields";
+      });
+    } else if (error.toString().contains(
+        "The password is invalid or the user does not have a password")) {
+      setState(() {
+        errorMessage = "Error: Invalid Password";
+      });
+    } else if (error.toString().contains(
+        "There is no user record corresponding to this identifier. The user may have been deleted.")) {
+      setState(() {
+        errorMessage = "Error: The user does not exist";
+      });
+    }
   }
 }
