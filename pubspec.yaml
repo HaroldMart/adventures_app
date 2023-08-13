@@ -39,6 +39,8 @@ dependencies:
   cloud_firestore: ^4.8.4
   firebase_auth: ^4.7.2
   logger: ^2.0.1
+  iconly: ^1.0.1
+  flutter_map: ^5.0.0
 
 dev_dependencies:
   flutter_test:

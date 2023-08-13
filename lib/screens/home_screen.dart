@@ -43,7 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('holi'),
+            const Text('Screen de ejemplo'),
             _tabs[_currentIndex],
           ],
         ),
