@@ -4,6 +4,7 @@ import 'home_screen.dart';
 import 'signup_screen.dart';
 import 'package:logger/logger.dart';
 import '/utils/color_utils.dart';
+import '../functions/google_sign_in.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -65,6 +66,22 @@ class _SignInScreenState extends State<SignInScreen> {
                     showErrors(error.toString());
                   });
                 }),
+                 const SizedBox(
+                  height: 15,
+                ),
+                const Text('Log in with: '),
+                  IconButton(
+                    icon: Image.asset('assets/images/google.png'),
+                    iconSize: 40,
+                    onPressed: () async {
+                      await signInWithGoogle().then((value) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const HomeScreen()));
+                    });}
+                  ),
+                const SizedBox(
+                  height: 40,
+                ),
                 signUpOption(),
                 const SizedBox(
                   height: 20,
@@ -125,3 +142,7 @@ class _SignInScreenState extends State<SignInScreen> {
     }
   }
 }
+
+
+
+
