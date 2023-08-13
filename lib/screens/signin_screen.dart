@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import '/reusable_widgets/reusable_widget.dart';
 import 'home_screen.dart';
-import 'reset_password.dart';
 import 'signup_screen.dart';
 import 'package:logger/logger.dart';
 import '/utils/color_utils.dart';
@@ -17,7 +16,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final TextEditingController _passwordTextController = TextEditingController();
- final TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
+  String errorMessage = "";
   final Logger _logger = Logger();
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(
                   height: 30,
                 ),
-                reusableTextField("Enter UserName", Icons.person_outline, false,
+                reusableTextField("Enter Email", Icons.person_outline, false,
                     _emailTextController),
                 const SizedBox(
                   height: 20,
@@ -51,7 +51,6 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                forgetPassword(context),
                 firebaseUIButton(context, "Sign In", () {
                   FirebaseAuth.instance
                       .signInWithEmailAndPassword(
@@ -59,12 +58,21 @@ class _SignInScreenState extends State<SignInScreen> {
                           password: _passwordTextController.text)
                       .then((value) {
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                        MaterialPageRoute(builder: (context) => const HomeScreen()));
                   }).onError((error, stackTrace) {
                     _logger.e("Error ${error.toString()}");
+
+                    showErrors(error.toString());
                   });
                 }),
-                signUpOption()
+                signUpOption(),
+                const SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  errorMessage,
+                  style: const TextStyle(color: Colors.red, fontSize: 16),
+                )
               ],
             ),
           ),
@@ -82,7 +90,7 @@ class _SignInScreenState extends State<SignInScreen> {
         GestureDetector(
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => SignUpScreen()));
+                MaterialPageRoute(builder: (context) => const SignUpScreen()));
           },
           child: const Text(
             " Sign Up",
@@ -93,20 +101,27 @@ class _SignInScreenState extends State<SignInScreen> {
     );
   }
 
-  Widget forgetPassword(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width,
-      height: 35,
-      alignment: Alignment.bottomRight,
-      child: TextButton(
-        child: const Text(
-          "Forgot Password?",
-          style: TextStyle(color: Colors.white70),
-          textAlign: TextAlign.right,
-        ),
-        onPressed: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ResetPassword())),
-      ),
-    );
+  void showErrors(String error) {
+    if (error.toString().contains("The email address is badly formatted")) {
+      setState(() {
+        errorMessage = "Error: Email not formatted";
+      });
+    } else if (error
+        .toString()
+        .contains("Unable to establish connection on channel")) {
+      setState(() {
+        errorMessage = "Error: Fill the fields";
+      });
+    } else if (error.toString().contains(
+        "The password is invalid or the user does not have a password")) {
+      setState(() {
+        errorMessage = "Error: Invalid Password";
+      });
+    } else if (error.toString().contains(
+        "There is no user record corresponding to this identifier. The user may have been deleted.")) {
+      setState(() {
+        errorMessage = "Error: The user does not exist";
+      });
+    }
   }
 }

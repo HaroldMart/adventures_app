@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'signin_screen.dart';
 import 'package:logger/logger.dart';
-
+import 'package:adventures_app/screens/map_screen.dart';
+import  "package:adventures_app/screens/settings_screen.dart";
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -79,37 +80,6 @@ class HomeContent extends StatelessWidget {
           Text('Correo actual: ${user?.email ?? "Ningún usuario en sesión"}',style: const TextStyle(fontSize: 18),),
           const Text("Home content")
           ],)
-    );
-  }
-}
-
-class MapContent extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Map Content'),
-    );
-  }
-}
-
-class SettingsContent extends StatelessWidget {
-   final Logger _logger = Logger();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        child: const Text('Logout'),
-        onPressed: () {
-          FirebaseAuth.instance.signOut().then((value) {
-            _logger.i('Signed Out');
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SignInScreen()),
-            );
-          });
-        },
-      ),
     );
   }
 }
