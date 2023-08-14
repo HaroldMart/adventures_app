@@ -13,6 +13,8 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
 
+  final mapBox_token = 'pk.eyJ1IjoidGNyaXNzMjUiLCJhIjoiY2xsYjY1dm80MDNyczNxdDNzMDhveDhoOSJ9.0gLUekHFAbNPUGxONiFxlw';
+
   Future<Position> getCurrentLocation() async {
     bool locationEnabled = await Geolocator.isLocationServiceEnabled();
 
@@ -61,7 +63,7 @@ class _MapScreenState extends State<MapScreen> {
           MapOptions(
             center: location,
             zoom: 15,
-            maxZoom: 25,
+            maxZoom: 30,
             minZoom: 5
           ),
         nonRotatedChildren: [
@@ -75,7 +77,11 @@ class _MapScreenState extends State<MapScreen> {
         ],
         children: [
           TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            urlTemplate: 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accesToken}',
+            additionalOptions: {
+              'accesToken': mapBox_token,
+              'id': 'mapbox/streets-v12'
+            },
           ),
           CircleLayer(circles: [
             CircleMarker(
