@@ -13,8 +13,6 @@ class MapScreen extends StatefulWidget {
 
 class _MapScreenState extends State<MapScreen> {
 
-  LatLng? location;
-
   Future<Position> getCurrentLocation() async {
     bool locationEnabled = await Geolocator.isLocationServiceEnabled();
 
@@ -38,24 +36,27 @@ class _MapScreenState extends State<MapScreen> {
     return await Geolocator.getCurrentPosition();
   }
 
+  LatLng? location;
+  var myPosition;
+
   void getPosition() async {
     Position position = await getCurrentLocation();
     setState(() {
       location = LatLng(position.latitude, position.longitude);
-      print('tu localizacion es: ${location}');
+      myPosition = location;
     });
   }
 
   @override
   void initState(){
-    getCurrentLocation();
+    getPosition();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: FlutterMap(
+      child: location == null ? const CircularProgressIndicator() : FlutterMap(
         options:
           MapOptions(
             center: location,
@@ -63,10 +64,27 @@ class _MapScreenState extends State<MapScreen> {
             maxZoom: 25,
             minZoom: 5
           ),
+        nonRotatedChildren: [
+          IconButton(
+            onPressed: () {
+              print('tu location es: $location');
+            }, 
+            icon: const Icon(Icons.home),
+            color: Colors.blue,
+          )
+        ],
         children: [
           TileLayer(
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-          )
+          ),
+          CircleLayer(circles: [
+            CircleMarker(
+              point: myPosition, 
+              radius: 100,
+              color: Colors.blue,
+              useRadiusInMeter: true,
+            )
+          ],)
         ],
       ),
     );
