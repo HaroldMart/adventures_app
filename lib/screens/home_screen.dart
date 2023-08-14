@@ -4,6 +4,8 @@ import 'signin_screen.dart';
 import 'package:logger/logger.dart';
 import 'package:adventures_app/screens/map_screen.dart';
 import  "package:adventures_app/screens/settings_screen.dart";
+import 'package:adventures_app/screens/places_screen.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -19,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _tabs = [
     HomeContent(),
     MapScreen(),
+    Places(),
     SettingsContent(),
   ];
 
@@ -55,6 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map, color: Colors.black,),
+            label: 'Map',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.place, color: Colors.black,),
             label: 'Map',
           ),
           BottomNavigationBarItem(
