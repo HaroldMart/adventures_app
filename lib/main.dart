@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/signin_screen.dart';
-import 'screens/home_screen.dart'; // Asumo que tienes una pantalla principal
+import 'screens/home_screen.dart'; 
 import 'package:flutter/material.dart';
 
 void main() async {
