@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'screens/signin_screen.dart';
+import 'screens/home_screen.dart'; // Asumo que tienes una pantalla principal
 import 'package:flutter/material.dart';
 
 void main() async {
@@ -19,7 +21,22 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const SignInScreen(),
+      home: const AuthChecker(), 
     );
+  }
+}
+
+class AuthChecker extends StatelessWidget {
+  const AuthChecker({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      return const HomeScreen(); 
+    } else {
+      return const SignInScreen(); 
+    }
   }
 }
