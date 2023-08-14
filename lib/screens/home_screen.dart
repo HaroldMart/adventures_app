@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   final List<Widget> _tabs = [
     HomeContent(),
-    MapContent(),
+    MapScreen(),
     SettingsContent(),
   ];
 
@@ -40,13 +40,10 @@ class _HomeScreenState extends State<HomeScreen> {
         automaticallyImplyLeading: false
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('holi'),
-            _tabs[_currentIndex],
-          ],
-        ),
+        child: IndexedStack(
+          index: _currentIndex,
+          children: _tabs,
+        )
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
