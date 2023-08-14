@@ -3,6 +3,7 @@ import '/reusable_widgets/reusable_widget.dart';
 import 'home_screen.dart';
 import 'package:logger/logger.dart';
 import '/utils/color_utils.dart';
+import '../functions/google_sign_in.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -103,16 +104,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         errorMessage = "Error: Fill the fields";
       });
-    } else if (error.toString().contains(
-        "The password is invalid or the user does not have a password")) {
-      setState(() {
-        errorMessage = "Error: Invalid Password";
-      });
-    } else if (error.toString().contains(
-        "There is no user record corresponding to this identifier. The user may have been deleted.")) {
-      setState(() {
-        errorMessage = "Error: The user does not exist";
-      });
-    }
+    } 
   }
 }
