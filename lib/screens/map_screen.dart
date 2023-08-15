@@ -5,7 +5,6 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:adventures_app/functions/tripAdvisor_connect.dart';
-import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
