@@ -6,7 +6,7 @@ const apiKey = 'A085720DB77A484F90FA58854D49B6C0';
 
 Future<List<Map<String, dynamic>>> getNearbyLocations(lat, lng) async {
 
-  var apiUrl = 'https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=$lat%2C%20$lng&key=$apiKey&language=es';
+  var apiUrl = 'https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong=$lat%2C%20$lng&key=$apiKey&radiusUnit=30mi&language=es';
 
   final response = await http.get(
     Uri.parse(apiUrl),
@@ -44,4 +44,3 @@ Future<List<String>> getPhotosForLocation(String locationId) async {
     throw Exception('Error al obtener las fotos');
   }
 }
-
