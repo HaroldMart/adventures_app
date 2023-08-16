@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:adventures_app/screens/map_screen.dart';
 import 'package:adventures_app/screens/places_screen.dart';
+import 'package:iconly/iconly.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -39,44 +40,58 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return Scaffold(
-      appBar:
-          AppBar(title: const Text('Home'), automaticallyImplyLeading: false),
+      appBar: AppBar(title: const Text('Home'), automaticallyImplyLeading: false),
       body: Center(
-          child: IndexedStack(
+        child: IndexedStack(
         index: _currentIndex,
         children: _tabs,
       )),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
         currentIndex: _currentIndex,
+        selectedItemColor: Colors.purple,
+        iconSize: 30,
         onTap: _onTabTapped,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home,
+              IconlyLight.home,
               color: Colors.black,
             ),
-            label: 'Home',
+            activeIcon: Icon(
+              IconlyBold.home,
+            ),
+            label: 'Inicio',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.map,
+              IconlyLight.location,
               color: Colors.black,
             ),
-            label: 'Map',
+            activeIcon: Icon(
+              IconlyBold.location,
+            ),
+            label: 'Mapa',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.place,
+              IconlyLight.bag,
               color: Colors.black,
             ),
-            label: 'Map',
+            activeIcon: Icon(
+              IconlyBold.bag,
+            ),
+            label: 'Local',
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.camera,
+              IconlyLight.image,
               color: Colors.black,
             ),
-            label: 'Camera',
+            activeIcon: Icon(
+              IconlyBold.image,
+            ),
+            label: 'Imagenes',
           ),
         ],
       ),

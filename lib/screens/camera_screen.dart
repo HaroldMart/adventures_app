@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -31,18 +32,24 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
+      floatingActionButton: FloatingActionButton(
+        onPressed: _takePhoto, 
+        child: const Icon(IconlyBold.camera)
+      ),
+      body: Center(child: _savedImages.isEmpty 
+      ? const Text('No hay imagenes, ¡agrega algunas!',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700
+        ),
+      ) 
+      : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
-              onPressed: _takePhoto,
-              child: Text('Tomar Foto'),
-            ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 3,
                 ),
                 itemCount: _savedImages.length,
