@@ -44,3 +44,5 @@ app.*.map.json
 /android/app/release
 
 macos/Flutter/GeneratedPluginRegistrant.swift
+
+lib/screens/map_screen.dart
