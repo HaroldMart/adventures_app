@@ -3,8 +3,8 @@ import '/reusable_widgets/reusable_widget.dart';
 import 'home_screen.dart';
 import 'package:logger/logger.dart';
 import '/utils/color_utils.dart';
-import '../functions/google_sign_in.dart';
 import 'package:flutter/material.dart';
+import 'package:iconly/iconly.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -51,17 +51,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Enter Email", Icons.person_outline, false,
+                reusableTextField("Correo", IconlyBold.profile, false,
                     _emailTextController),
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Enter Password", Icons.lock_outlined, true,
+                reusableTextField("Contraseña", IconlyBold.lock, true,
                     _passwordTextController),
                 const SizedBox(
                   height: 20,
                 ),
-                firebaseUIButton(context, "Sign Up", () {
+                firebaseUIButton(context, "Crear cuenta", () {
                   FirebaseAuth.instance
                       .createUserWithEmailAndPassword(
                           email: _emailTextController.text,
@@ -69,10 +69,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       .then((userCredential) {
                          User? user = userCredential.user;
                          user?.sendEmailVerification();
-                         
                          const Text("Created New Account");
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()));
+                        MaterialPageRoute(builder: (context) => const HomeScreen()));
                   }).onError((error, stackTrace) {
                    _logger.e("Error ${error.toString()}");
 

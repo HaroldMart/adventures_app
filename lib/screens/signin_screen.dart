@@ -53,9 +53,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(
                   height: 5,
                 ),
-                firebaseUIButton(context, "Sign In", () {
-                  FirebaseAuth.instance
-                      .signInWithEmailAndPassword(
+                firebaseUIButton(context, "Iniciar Sesión", () {
+                  FirebaseAuth.instance.signInWithEmailAndPassword(
                           email: _emailTextController.text,
                           password: _passwordTextController.text)
                       .then((value) {
@@ -73,7 +72,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   height: 15,
                 ),
                 const Text(
-                  'Log in with:',
+                  'O inicia con',
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 IconButton(
@@ -114,7 +113,7 @@ class _SignInScreenState extends State<SignInScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("Don't have account?",
+        const Text("¿Aún sin cuenta?",
             style: TextStyle(color: Colors.white70)),
         GestureDetector(
           onTap: () {
@@ -122,7 +121,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 MaterialPageRoute(builder: (context) => const SignUpScreen()));
           },
           child: const Text(
-            " Sign Up",
+            "Registrate",
             style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         )

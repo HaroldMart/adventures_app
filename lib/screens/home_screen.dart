@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'signin_screen.dart';
 import 'package:logger/logger.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:adventures_app/screens/map_screen.dart';
 import 'package:adventures_app/screens/places_screen.dart';
 import 'package:iconly/iconly.dart';
@@ -21,10 +20,9 @@ class _HomeScreenState extends State<HomeScreen> {
   int _currentIndex = 0;
 
   final List<Widget> _tabs = [
-    HomeContent(),
+    Home(),
     MapScreen(),
     Places(),
-    CameraScreen(),
   ];
 
   void _onTabTapped(int index) {
@@ -40,12 +38,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Home'), automaticallyImplyLeading: false),
-      body: Center(
-        child: IndexedStack(
+      appBar: AppBar(title: const Text('Swifty'), automaticallyImplyLeading: false),
+      body: IndexedStack(
         index: _currentIndex,
         children: _tabs,
-      )),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
         currentIndex: _currentIndex,
@@ -83,51 +80,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             label: 'Local',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              IconlyLight.image,
-              color: Colors.black,
-            ),
-            activeIcon: Icon(
-              IconlyBold.image,
-            ),
-            label: 'Imagenes',
-          ),
         ],
       ),
     );
-  }
-}
-
-class HomeContent extends StatelessWidget {
-  final Logger _logger = Logger();
-  User? user = FirebaseAuth.instance.currentUser;
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: Column(
-      children: [
-        Text(
-          'Correo actual: ${user?.email ?? "Ningún usuario en sesión"}',
-          style: const TextStyle(fontSize: 18),
-        ),
-        const Text("Home content"),
-        Center(
-          child: ElevatedButton(
-            child: const Text('Logout'),
-            onPressed: () async {
-              await GoogleSignIn().signOut();
-              FirebaseAuth.instance.signOut().then((value) {
-                _logger.i('Signed Out');
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignInScreen()),
-                );
-              });
-            },
-          ),
-        )
-      ],
-    ));
   }
 }
